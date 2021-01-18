@@ -1,6 +1,6 @@
 img{
     width: 400px;
-    height: 400px;
+    height: 350px;
 
 }
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
@@ -23,9 +23,13 @@ h3{
     color: rgb(255, 255, 255);
 }
 .Form{
-    margin-left: 250px;
+    margin-left: 400px;
     font-family: 'Potta One', cursive;
     color: rgb(146, 11, 135);
     
 
 }
+canvas{
+    width:1200px !important;
+    height:500px !important;
+  }
