@@ -7,7 +7,19 @@ var RIIndex;
 var leftImage = document.getElementById('LI');
 var middleImage = document.getElementById('MI');
 var rightImage = document.getElementById('RI');
-var pResults= document.getElementById('PR');
+var pResults;
+
+//add rounds number event
+var formdiv = document.getElementById('roundsForm');
+formdiv.addEventListener('submit',roundsSumbmission);
+function roundsSumbmission(event){
+    event.preventDefault();
+    rounds=event.target.roundsNumber.value;
+    
+}
+//ooooooooooooooooooooooooooooooooooooooooo
+
+
 
 function ProductImages (productName,imagePath){
     this.productName=productName;
@@ -83,22 +95,29 @@ function voting(event){
     } else {
 
         
-    
+        pResults= document.getElementById('PR');
         leftImage.removeEventListener('click',voting);
         middleImage.removeEventListener('click',voting);
         rightImage.removeEventListener('click',voting);
 
+        function viewButton(event,pVotes){
+            event.preventDefault();
+            
+            
+            for (let i = 0; i < ProductImages.allImages.length; i++) {
+                pVotes=document.createElement('li');
+                pVotes.textContent=ProductImages.allImages[i].productName+' had '+ProductImages.allImages[i].votes+' votes, and was seen '+ProductImages.allImages[i].timeDisplayed+'  times. as percentage of '+Math.ceil((ProductImages.allImages[i].votes/ProductImages.allImages[i].timeDisplayed)*100) +'%' ;
+                pResults.appendChild(pVotes);
+                
+                
+            }
+        }
+        var resultsDiv = document.getElementById('viewResults');
+  
+resultsDiv.addEventListener('submit',viewButton);
+
     }
 }
-function viewButton(){
-    var pVotes;
-    for (let i = 0; i < ProductImages.allImages.length; i++) {
-        pVotes=document.createElement('li');
-        pVotes.textContent=ProductImages.allImages[i].productName+' had '+ProductImages.allImages[i].votes+' votes, and was seen '+ProductImages.allImages[i].timeDisplayed+'  times. as percentage of '+Math.ceil((ProductImages.allImages[i].votes/ProductImages.allImages[i].timeDisplayed)*100) +'%' ;
-        pResults.appendChild(pVotes);
-        
-        
-    }
-}
-// this is the same as the first branch but I had to repush to copy the branch pull request link
+
+
 
