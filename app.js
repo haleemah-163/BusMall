@@ -11,7 +11,9 @@ var pResults;
 var timeDisplayed=[];
 var votes=[];
 var productNames=[];
-// var shownImages=[];
+var LShown =-1;
+var MShown=-1;
+var RShown=-1;
 
 
 //add rounds number event
@@ -65,18 +67,24 @@ function GenerateRandomIndex(){
 }
 
 function RenderThreeImages(){
-    LIIndex=GenerateRandomIndex();
+    var shownImages=[LShown,MShown,RShown];
+    do {LIIndex=GenerateRandomIndex();}
+    while(shownImages.includes(LIIndex));
+    LShown=LIIndex;
+    shownImages.push(LIIndex);
+    
     do { MIIndex=GenerateRandomIndex();
         
-    } while (LIIndex===MIIndex);
+    } while (shownImages.includes(MIIndex));
+    MShown=MIIndex;
+    shownImages.push(MIIndex);
+
     do {RIIndex=GenerateRandomIndex();
         
-    } while (RIIndex===LIIndex || RIIndex===MIIndex );//||shownImages.includes(LIIndex)||shownImages.includes(MIIndex)||shownImages.includes(RIIndex);
-    // HERE I COMMENTED THE HALF PART OF THE WHILE BECAUSE WHEN I RUN IT, SOMETHING GETS WRONG WITH THE WEBSITE AND IT STOPS, I DON'T KNOW IF IT'S BECAUSE OF MY LOW LAPTOP QUALIFICATIONS OR THE WRONG CODE. SO INCASE OF THE FIRST REASON; I COMMENTED THIS PART  **"||shownImages.includes(LIIndex)||shownImages.includes(MIIndex)||shownImages.includes(RIIndex);"** UNTIL I GET THE ANSWER
+    } while (shownImages.includes(RIIndex));
+    RShown=RIIndex;
     
-    // shownImages.push(LIIndex);
-    // shownImages.push(MIIndex);
-    // shownImages.push(RIIndex);
+   /////////////////////////////////////////////////////////////////////////////////////
     
     leftImage.src= ProductImages.allImages[LIIndex].imagePath;
     middleImage.src= ProductImages.allImages[MIIndex].imagePath;
@@ -147,24 +155,10 @@ var chart = new Chart(ctx, {
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: votes
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
-var ctx = document.getElementById('mySecondChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-
-    // The data for our dataset
-    data: {
-        labels: productNames ,
-        datasets: [{
+        },{
             
             label: 'shown',
-            backgroundColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(0, 99, 0)',
             borderColor: 'rgb(255, 99, 132)',
             data: timeDisplayed
         }]
@@ -173,6 +167,7 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {}
 });
+
         }
 //////////////////////////////////////////////////////////////////////////////////
         
