@@ -1,4 +1,5 @@
 'use strict';
+// the global variables:///////////////////////////////////////////////////////////////////////
 var rounds=25;
 var roundsCounter=0;
 var LIIndex;
@@ -16,7 +17,7 @@ var MShown=-1;
 var RShown=-1;
 
 
-//add rounds number event
+//add rounds number event//////////////////////////////////////////////////
 var formdiv = document.getElementById('roundsForm');
 formdiv.addEventListener('submit',roundsSumbmission);
 function roundsSumbmission(event){
@@ -26,7 +27,7 @@ function roundsSumbmission(event){
 }
 //ooooooooooooooooooooooooooooooooooooooooo
 
-
+// constructor Funvtion
 
 function ProductImages (productName,imagePath){
     this.productName=productName;
@@ -36,8 +37,11 @@ function ProductImages (productName,imagePath){
     ProductImages.allImages.push(this);
     productNames.push(productName);
 }
+////// Images Array://///////////////////////////////////////////////////
 ProductImages.allImages=[];
 
+
+// adding the objects to the constructor 
 
 new ProductImages ('bag','img/bag.jpg');
 new ProductImages ('banana','img/banana.jpg');
@@ -62,10 +66,13 @@ new ProductImages ('wine-glass','img/wine-glass.jpg');
 
 RenderThreeImages();
 
-//OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+//generating random pictures function OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 function GenerateRandomIndex(){
     return Math.floor(Math.random()*ProductImages.allImages.length);
 }
+
+
+/////// rendering function:///////////////////////////////////////////////////////////////////////////
 
 function RenderThreeImages(){
     var shownImages=[LShown,MShown,RShown];
@@ -96,10 +103,12 @@ function RenderThreeImages(){
 
 
 
-
+// adding click event to each rendered picture://////////////////////////////
 leftImage.addEventListener('click', voting);
 middleImage.addEventListener('click',voting);
 rightImage.addEventListener('click',voting);
+
+// function of increasing the votes and times displayed for each clicked image////////////////
 
 function voting(event){
     roundsCounter++;
@@ -153,13 +162,16 @@ var chart = new Chart(ctx, {
     // The data for our dataset
     data: {
         labels: productNames ,
-        datasets: [{
+        
+        datasets: [
+            // the first data///////////////////////
+            {
             label: 'votes',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: votes
         },{
-            
+            // the second data /////////////////////
             label: 'shown',
             backgroundColor: 'rgb(0, 99, 0)',
             borderColor: 'rgb(255, 99, 132)',
@@ -173,10 +185,10 @@ var chart = new Chart(ctx, {
 resultsLocalStorage();
 getData();
         }
-//////////////////////////////////////////////////////////////////////////////////
+
         
 
-// view event
+// view event ////////////////////////////////////////////////////////////////////////////////////
         var resultsDiv = document.getElementById('viewResults');
   
 resultsDiv.addEventListener('submit',viewButton);
